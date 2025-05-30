@@ -15,10 +15,9 @@ function loadIndianFood() {
     const results = [];
     fs.createReadStream(csvPath)
       .pipe(csv())
-      .on("data", (data) => results.push({...data,pk: results.length + 1}))
+      .on("data", (data) => results.push({ ...data, pk: results.length + 1 }))
       .on("end", () => {
         indianFoodData = results;
-        console.log("[indianFoodLoader] CSV loaded:", results, "records");
         resolve(results);
       })
       .on("error", (err) => {

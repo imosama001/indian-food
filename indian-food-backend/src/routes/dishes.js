@@ -1,20 +1,28 @@
 import { Router } from "express";
 import {
-  getAllDishesController,
-  getDishByNameController,
+  getDishByPkController,
+  getDishByNameQueryController,
   suggestDishesController,
   addDishController,
   updateDishController,
   deleteDishController,
+  getSimilarDishesController,
+  getDishBySearchController,
 } from "../controllers/dishController.js";
 
 const router = Router();
 
-// GET all dishes
-router.get("/", getAllDishesController);
+// GET all dishes or by name query
+router.get("/", getDishByNameQueryController);
 
-// GET dish by name
-router.get("/:name", getDishByNameController);
+// GET dish by pk
+router.get("/:pk/", getDishByPkController);
+
+// Get Dish by search query
+router.get("/search/:query",getDishBySearchController);
+
+// // GET similar dishes by dish pk
+router.get("/:pk/similar", getSimilarDishesController);
 
 // POST suggest dishes by ingredients
 router.post("/suggest", suggestDishesController);
@@ -22,10 +30,10 @@ router.post("/suggest", suggestDishesController);
 // POST create a new dish
 router.post("/", addDishController);
 
-// PUT update a dish by name
-router.put("/:name", updateDishController);
+// PUT update a dish by pk
+router.put("/:pk", updateDishController);
 
-// DELETE a dish by name
-router.delete("/:name", deleteDishController);
+// DELETE a dish by pk
+router.delete("/:pk", deleteDishController);
 
-export default router
+export default router;

@@ -2,7 +2,7 @@ import _ from "lodash";
 
 // Utility functions
 export const formatTime = (minutes) => {
-  if (!minutes || minutes === 0) return "N/A";
+  if (!minutes || minutes === 0 || isNaN(minutes)) return "N/A";
   if (minutes < 60) return `${minutes} min`;
   const hours = Math.floor(minutes / 60);
   const remainingMinutes = minutes % 60;

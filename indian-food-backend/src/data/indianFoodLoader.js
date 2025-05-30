@@ -15,7 +15,11 @@ function loadIndianFood() {
     const results = [];
     fs.createReadStream(csvPath)
       .pipe(csv())
-      .on("data", (data) => results.push({ ...data, pk: results.length + 1 }))
+      .on("data", (data) => {
+        let prep_time = data.prep_time > 0 ? parseInt(data.prep_time, 10) : 0;
+        let cook_time = data.cook_time > 0 ? parseInt(data.cook_time, 10) : 0;
+        results.push({ ...data, pk: results.length + 1, prep_time, cook_time });
+      })
       .on("end", () => {
         indianFoodData = results;
         resolve(results);

@@ -132,7 +132,11 @@ function HomePage() {
         ),
         render: (dish) => (
           <Link href={`/dish/${dish.pk}`}>
-            <Button plain color="brand" label={dish.name} />
+            <Button
+              plain
+              color="brand"
+              label={(+dish?.name !== -1 && dish.name) || "N/A"}
+            />
           </Link>
         ),
       },
@@ -140,7 +144,10 @@ function HomePage() {
         property: "diet",
         header: "Diet",
         render: (dish) => (
-          <Tag value={dish.diet} background={getDietColor(dish.diet)} />
+          <Tag
+            value={(+dish?.diet !== -1 && dish.diet) || "N/A"}
+            background={getDietColor(dish.diet)}
+          />
         ),
       },
       {
@@ -172,18 +179,19 @@ function HomePage() {
       {
         property: "course",
         header: "Course",
-        render: (dish) => _.capitalize(dish.course),
+        render: (dish) =>
+          +dish?.course !== -1 ? _.capitalize(dish.course) : "N/A",
       },
       {
         property: "region",
         header: "Region",
-        render: (dish) => dish.region || "Various",
+        render: (dish) => (+dish?.region !== -1 && dish.region) || "Various",
       },
       {
         property: "flavor_profile",
         header: "Flavor",
         render: (dish) =>
-          dish.flavor_profile ? (
+          dish.flavor_profile && +dish?.flavor_profile !== -1 ? (
             <Tag
               value={dish.flavor_profile}
               background={getFlavorColor(dish.flavor_profile)}

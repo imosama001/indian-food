@@ -46,7 +46,7 @@ function DishDetailsPage() {
         ]);
 
         setDish(dishData);
-        setSimilarDishes(similarData);
+        setSimilarDishes(similarData?.results || []);
       } catch (error) {
         console.error("Error loading dish:", error);
         setError("Dish not found");

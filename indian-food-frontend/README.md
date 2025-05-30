@@ -1,70 +1,98 @@
-# Getting Started with Create React App
+# Indian Food Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A Node.js Express frontend for Indian food data, supporting CRUD operations, ingredient-based dish suggestions, and CSV/JSON data management.
 
-## Available Scripts
+ ## Dish Details
+ - Displays the following attributes of a given dish:
+ - 1. name
+ - 2. ingredients
+ - 3. diet type (veg or non-veg)
+ - 4. preparation time
+ - 5. cooking time
+ - 6. flavor
+ - 7. course
+ - 8. state
+ - 9. region
 
-In the project directory, you can run:
+ ## Dishes List
+ - List all the dishes and their details in a tabular format.
+ - 1. Use pagination to limit the number of rows displayed at a time.
+ - 2. Enable sorting on a few relevant columns such as dish name, prep time, cooking time, etc.
+ - 3. Enable filtering on a few relevant columns such as diet, flavor, state, etc.
+ - 4. Navigation:
+   - a. Display "Dish Details" upon clicking the dish name in the table
 
-### `npm start`
+![alt text](image.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![alt text]({5FDDDFB3-F3F6-44C9-9DDF-221D88B6CE0D}.png)
+## Project Structure
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+indian-food-frontend/
+  src/
+    Components              # Components
+    Pages                   # Pages
+    Pages/
+      DisDetails
+      HomePage
+      NotFoundPage
+    
+    utils                   # api gateways and functions
+    App.css
+    App.jsx
+    App.test.js
+    index.css
+    index.js
+    logo.svg
+    reportWebVitals
+    setupTests
+    theme
+  package-lock.json
+  package.json
+  README.md
 
-### `npm test`
+ .gitignore
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
 
-### `npm run build`
+## Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Prerequisites
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Node.js (v18+ recommended)
+- npm
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Installation
 
-### `npm run eject`
+1. Clone the repository:
+   ```sh
+   git clone <https://github.com/imosama001/indian-food.git>
+   cd indian-food-frontend
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Running the Server
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Start the frontend server:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```sh
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The server will run on [http://localhost:3000](http://localhost:3000) by default.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Scripts
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- `npm start` — Start the server with nodemon
 
-### Code Splitting
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+ISC
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+_For the backedn, see the `indian-food-backedn` folder._

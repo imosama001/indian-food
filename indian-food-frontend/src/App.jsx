@@ -10,7 +10,7 @@ function Router() {
   return (
     <Main background="neutral-1" fill>
       <SearchHeader />
-      <Box flex>
+      <Box flex height={{max:"calc(100vh - 64px)"}} overflow="auto">
         <Switch>
           <Route path="/" component={HomePage} />
           <Route path="/dish/:id" component={DishDetailsPage} />

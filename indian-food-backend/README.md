@@ -60,16 +60,18 @@ Start the backend server:
 npm start
 ```
 
-The server will run on [http://localhost:8080](http://localhost:8080) by default.
+The server will run on [http://localhost:8000](http://localhost:8000) by default.
 
 ### API Endpoints
 
 - `GET    /dishes` — Get all dishes
-- `GET    /dishes/:name` — Get dish by name
+- `GET    /dishes/:pk` — Get dish by id
+- `GET    /dishes/search/:query` get dish by search
+- ` GET   /dishes/:pk/similar` get similar dishes
 - `POST   /dishes/suggest` — Suggest dishes by ingredients (body: `{ ingredients: ["ing1", ...] }`)
 - `POST   /dishes` — Add a new dish (body: dish object)
-- `PUT    /dishes/:name` — Update a dish by name (body: updated fields)
-- `DELETE /dishes/:name` — Delete a dish by name
+- `PUT    /dishes/:pk` — Update a dish by id (body: updated fields)
+- `DELETE /dishes/:pk` — Delete a dish by id
 
 ### Data Management
 

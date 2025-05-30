@@ -287,6 +287,7 @@ function HomePage() {
 
         {hasActiveFilters && (
           <Button
+            margin={{ top: "16px" }}
             icon={<Clear />}
             label="Clear Filters"
             onClick={clearFilters}

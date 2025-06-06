@@ -220,6 +220,15 @@ function DishSuggester() {
           </Box>
         ) : dishes?.length > 0 ? (
           <>
+            <Text
+              weight="bold"
+              size="medium"
+              alignSelf="start"
+              pad="medium"
+              margin={{ bottom: "small", left: "16px" }}
+            >
+              Dishes
+            </Text>
             <Grid columns={{ count: "fill", size: "medium" }} gap="medium">
               {dishes.map((dish) => (
                 <Card key={dish.pk} hoverIndicator>

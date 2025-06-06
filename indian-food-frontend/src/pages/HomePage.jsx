@@ -15,6 +15,7 @@ import { Link } from "wouter";
 import _ from "lodash";
 import { dishesApi } from "../utils/api";
 import { formatTime, getDietColor, getFlavorColor } from "../utils/functions";
+import { navigate } from "wouter/use-browser-location";
 
 const itemsPerPage = 20;
 
@@ -210,13 +211,21 @@ function HomePage() {
 
   return (
     <Box fill pad="medium" gap="medium">
-      <Box>
-        <Heading level={2} margin="none">
-          Indian Dishes
-        </Heading>
-        <Text>
-          Explore {total} authentic Indian dishes from various regions
-        </Text>
+      <Box direction="row" justify="between" align="center">
+        <Box>
+          <Heading level={2} margin="none">
+            Indian Dishes
+          </Heading>
+          <Text>
+            Explore {total} authentic Indian dishes from various regions
+          </Text>
+        </Box>
+        <Box>
+          <Button
+            label="Suggest Dishes"
+            onClick={() => navigate("/dish-suggestions")}
+          />
+        </Box>
       </Box>
 
       {/* Filters */}

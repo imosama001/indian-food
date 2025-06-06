@@ -64,9 +64,9 @@ export function filterSimilarDishes(dishId) {
     .filter(
       (dish) =>
         dish.pk !== dishId &&
-        (dish.course === targetDish.course ||
-          dish.diet === targetDish.diet ||
-          dish.flavor_profile === targetDish.flavor_profile ||
+        dish.course === targetDish.course &&
+        dish.diet === targetDish.diet &&
+        (dish.flavor_profile === targetDish.flavor_profile ||
           dish.region === targetDish.region)
     )
     .slice(0, 3); // Limit to 3 similar dishes

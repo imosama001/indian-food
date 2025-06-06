@@ -253,9 +253,9 @@ function DishDetailsPage() {
           {similarDishes.length > 0 ? (
             <Grid columns={{ count: "fill", size: "medium" }} gap="medium">
               {similarDishes.map((similarDish) => (
-                <Card key={similarDish.id} hoverIndicator>
+                <Card key={similarDish.pk} hoverIndicator>
                   <CardBody pad="medium">
-                    <Link href={`/dish/${similarDish.id}`}>
+                    <Link href={`/dish/${similarDish.pk}`}>
                       <Button plain fill>
                         <Box gap="small">
                           <Text weight="bold" color="brand">

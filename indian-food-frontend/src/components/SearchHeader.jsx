@@ -61,7 +61,14 @@ function SearchHeader() {
       border={{ side: "bottom", color: "neutral-2" }}
     >
       <Box direction="row" align="center" gap="medium" fill>
-        <Box direction="row" align="center" gap="small">
+        <Box
+          direction="row"
+          align="center"
+          gap="small"
+          onClick={() => navigate("/")}
+          focusIndicator={false}
+          style={{ cursor: "pointer" }}
+        >
           <Text size="xlarge" weight="bold" color="brand">
             🍽️
           </Text>

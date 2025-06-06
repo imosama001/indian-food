@@ -168,7 +168,14 @@ function DishSuggester() {
           <Text weight="bold" size="medium" alignSelf="start" pad="small">
             Selected Ingredients
           </Text>
-          <Button label="Clear" onClick={() => setSelected([])} />
+          <Button
+            label="Clear"
+            onClick={() => {
+              setSelected([]);
+              setAllDishes([]);
+              if (loading) setLoading(false);
+            }}
+          />
         </Box>
         <Box
           pad="medium"

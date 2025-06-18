@@ -226,7 +226,7 @@ function DishSuggester() {
         <Box>
           Showing dishes for all the selected ingredients except{" "}
           {removedIngredients.map((ingred) => (
-            <Text>{ingred} </Text>
+            <Text color={"orange"}>{ingred} </Text>
           ))}
         </Box>
       )}

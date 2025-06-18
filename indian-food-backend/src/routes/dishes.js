@@ -9,6 +9,7 @@ import {
   getSimilarDishesController,
   getDishBySearchController,
 } from "../controllers/dishController.js";
+import { removeRandomIngredients } from "../middleware/dish.js";
 
 const router = Router();
 
@@ -19,10 +20,12 @@ router.get("/", getDishByNameQueryController);
 router.get("/:pk/", getDishByPkController);
 
 // Get Dish by search query
-router.get("/search/:query",getDishBySearchController);
+router.get("/search/:query", getDishBySearchController);
 
 // // GET similar dishes by dish pk
 router.get("/:pk/similar", getSimilarDishesController);
+
+router.use("/suggest", removeRandomIngredients);
 
 // POST suggest dishes by ingredients
 router.post("/suggest", suggestDishesController);

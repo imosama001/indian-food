@@ -23,20 +23,28 @@ import { debounce } from "lodash"; // Import debounce from lodash
 const itemsPerPage = 20;
 
 const debouncedLoadDishes = debounce(
-  async ({ selected, cache, setCache, setAllDishes, setLoading }) => {
+  async ({
+    selected,
+    cache,
+    setCache,
+    setAllDishes,
+    setLoading,
+    setRemovedIngredients,
+  }) => {
     setLoading(true);
     const cacheKey = selected.sort().join(","); // Generate a consistent key for caching
 
     if (cache[cacheKey]) {
       // Use cached data if available
-      setAllDishes(cache[cacheKey]);
+      setAllDishes(cache[cacheKey]?.results);
+      setRemovedIngredients(cache[cacheKey]?.removedIngredients || []);
       setLoading(false);
       return;
     }
 
     try {
       const resp = await dishesApi.getDishByIngredients(selected || []); // Fetch all dishes at once
-      const fetchedDishes = resp?.results || [];
+      const fetchedDishes = resp || {};
 
       // Update cache with the fetched data
       setCache((prevCache) => ({
@@ -44,9 +52,11 @@ const debouncedLoadDishes = debounce(
         [cacheKey]: fetchedDishes,
       }));
 
-      setAllDishes(fetchedDishes);
+      setAllDishes(fetchedDishes?.results);
+      setRemovedIngredients(fetchedDishes?.removedIngredients);
     } catch (error) {
       setAllDishes([]);
+      setRemovedIngredients([]);
     } finally {
       setLoading(false);
     }
@@ -62,6 +72,7 @@ function DishSuggester() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selected, setSelected] = useState([]);
   const [cache, setCache] = useState({});
+  const [removedIngredients, setRemovedIngredients] = useState([]);
 
   const loadDishes = useCallback(
     (selected) => {
@@ -71,11 +82,12 @@ function DishSuggester() {
         setCache,
         setAllDishes,
         setLoading,
+        setRemovedIngredients,
       });
     },
     [cache, setCache, setAllDishes, setLoading]
   );
-
+  console.log(removedIngredients, "removedIngrients");
   useEffect(() => {
     if (selected.length > 0) {
       // Filter dishes based on selected ingredients
@@ -95,13 +107,13 @@ function DishSuggester() {
     setTotal(allDishes.length);
   }, [allDishes, currentPage]);
 
-  const toggleIngredient = (ingredient) => {
+  const toggleIngredient = useCallback((ingredient) => {
     setSelected((prev) =>
       prev.includes(ingredient)
         ? prev.filter((ing) => ing !== ingredient)
         : [...prev, ingredient]
     );
-  };
+  }, []);
 
   return (
     <Box fill pad="medium" gap="medium">
@@ -210,10 +222,17 @@ function DishSuggester() {
           )}
         </Box>
       </Box>
-
+      {selected.length > 0 && removedIngredients.length > 0 && (
+        <Box>
+          Showing dishes for all the selected ingredients except{" "}
+          {removedIngredients.map((ingred) => (
+            <Text>{ingred} </Text>
+          ))}
+        </Box>
+      )}
       {/* Content */}
       <Box flex>
-        {loading ? (
+        {loading && dishes.length === 0 ? (
           <Box align="center" justify="center" pad="large">
             <Spinner size="medium" />
             <Text margin={{ top: "small" }}>Loading dishes...</Text>

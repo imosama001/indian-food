@@ -23,10 +23,15 @@ indian-food-backend/
     data/
       indian_food.csv   # Main data source (CSV)
       indianFoodLoader.js # Loads and watches CSV data
+    middleware/
+      dish.js           # Middlewares related to dish
     routes/
       dishes.js         # Express routes for dishes
     services/
       dishService.js    # Business/data logic (services)
+    tests/
+     removeRandomIngredients.test.js 
+                        # To test the removeRandomIngredients middleware
     utils/
       csvToJson.js      # Utility to convert CSV to JSON
   package.json
@@ -59,6 +64,11 @@ Start the backend server:
 ```sh
 npm start
 ```
+test the backend :
+
+```sh
+npm test
+```
 
 The server will run on [http://localhost:8000](http://localhost:8000) by default.
 
@@ -77,12 +87,11 @@ The server will run on [http://localhost:8000](http://localhost:8000) by default
 
 - The app loads data from `src/data/indian_food.csv` at startup and watches for changes.
 - CRUD operations update the CSV file for persistence.
-- Use `npm run convert` to convert the CSV to JSON (`src/data/indian_food.json`).
 
 ### Scripts
 
 - `npm start` — Start the server with nodemon
-- `npm run convert` — Convert CSV to JSON
+- `npm test` — To test the server in using jest
 
 ## License
 

@@ -1,58 +1,21 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
 import { Header, Box, TextInput, Text } from "grommet";
 import { Search, Close } from "grommet-icons";
 import { useLocation } from "wouter";
-import _ from "lodash";
-import { dishesApi } from "../utils/api";
+
 import { getDietIcon } from "../utils/functions";
+import useSearch from "../utils/hooks/useSearch";
+import LanguageSelector from "./LanguageSwitch";
 
 function SearchHeader() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
+  const {
+    searchQuery,
+    setSearchQuery,
+    showSuggestions,
+    suggestions,
+    handleSuggestionClick,
+    clearSearch,
+  } = useSearch();
   const [, navigate] = useLocation();
-
-  const debouncedSearch = useMemo(
-    () =>
-      _.debounce(async (query) => {
-        if (query.length >= 2) {
-          try {
-            const resp = await dishesApi.search(query);
-            setSuggestions(resp?.results || []);
-            setShowSuggestions(true);
-          } catch (error) {
-            console.error("Search error:", error);
-            setSuggestions([]);
-          }
-        } else {
-          setSuggestions([]);
-          setShowSuggestions(false);
-        }
-      }, 300),
-    []
-  );
-
-  useEffect(() => {
-    debouncedSearch(searchQuery);
-    return () => {
-      debouncedSearch.cancel();
-    };
-  }, [searchQuery, debouncedSearch]);
-
-  const handleSuggestionClick = useCallback(
-    (dishId) => {
-      navigate(`/dish/${dishId}`);
-      setSearchQuery("");
-      setShowSuggestions(false);
-    },
-    [navigate]
-  );
-
-  const clearSearch = useCallback(() => {
-    setSearchQuery("");
-    setSuggestions([]);
-    setShowSuggestions(false);
-  }, []);
 
   return (
     <Header
@@ -75,6 +38,7 @@ function SearchHeader() {
           <Text size="large" weight="bold" color="neutral-4">
             Indian Cuisine Explorer
           </Text>
+          <LanguageSelector />
         </Box>
 
         <Box flex align="center" justify="center" width="medium">

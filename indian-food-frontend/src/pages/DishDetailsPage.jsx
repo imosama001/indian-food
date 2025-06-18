@@ -13,6 +13,7 @@ import {
 import { Previous, Clock, Restaurant } from "grommet-icons";
 import { useRoute, Link } from "wouter";
 import _ from "lodash";
+import { useTranslation } from "react-i18next";
 import { dishesApi } from "../utils/api";
 import {
   formatTime,
@@ -29,6 +30,7 @@ function DishDetailsPage() {
   const [similarDishes, setSimilarDishes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { t } = useTranslation();
 
   const dishId = params?.id ? parseInt(params.id) : null;
 
@@ -57,7 +59,7 @@ function DishDetailsPage() {
 
     loadDish();
   }, [dishId]);
-
+  console.log("Dish ID:", dishId);
   if (!dishId) {
     return (
       <Box fill pad="medium" align="center" justify="center">
@@ -93,6 +95,9 @@ function DishDetailsPage() {
         <Text color="neutral-3">
           The dish you're looking for could not be found.
         </Text>
+        {/* <Trans i18nKey="description.part1">
+          The dish you're looking for could not be found.
+        </Trans> */}
         <Link href="/">
           <Button
             label="Back to All Dishes"

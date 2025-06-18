@@ -13,6 +13,8 @@ import {
 import { Clear, Up, Down } from "grommet-icons";
 import { Link } from "wouter";
 import _ from "lodash";
+import { useTranslation, Trans } from "react-i18next";
+
 import { dishesApi } from "../utils/api";
 import { formatTime, getDietColor, getFlavorColor } from "../utils/functions";
 import { navigate } from "wouter/use-browser-location";
@@ -33,7 +35,7 @@ function HomePage() {
   });
   const [sortField, setSortField] = useState("name");
   const [sortOrder, setSortOrder] = useState("asc");
-
+const { t } = useTranslation();
   const loadDishes = useCallback(async () => {
     setLoading(true);
     try {
@@ -216,9 +218,12 @@ function HomePage() {
           <Heading level={2} margin="none">
             Indian Dishes
           </Heading>
-          <Text>
+          {/* <Text>
             Explore {total} authentic Indian dishes from various regions
-          </Text>
+          </Text> */}
+          <Trans i18nKey="description.part1">
+          {/* The dish you're looking for could not be found. */}
+        </Trans>
         </Box>
         <Box>
           <Button
